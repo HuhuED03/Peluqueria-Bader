@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perruqueria Estil - Tu Barbería en Figueres</title>
     
+    <meta name="description" content="Descubre Perruqueria Estil en Figueres. Barbería tradicional con estilo moderno. Expertos en cortes de precisión, diseño de barba y cuidado masculino. ¡Pide tu cita!">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     
-    <!-- Enlace estable y oficial a los iconos de Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -20,13 +21,13 @@
             --text-dark: #222222;
             --text-light: #FFFFFF;
             --text-muted: #666666;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Poppins', sans-serif;
+            --border-dark: rgba(255, 255, 255, 0.1);
+            --background-alt: #EDEAE5;
         }
 
         html { scroll-behavior: smooth; }
         body {
-            font-family: var(--font-body);
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             background-color: var(--background-light);
             color: var(--text-dark);
@@ -34,7 +35,7 @@
             font-weight: 400;
         }
         h2, h3, h4 {
-            font-family: var(--font-display);
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
             color: var(--text-dark);
             margin: 0 0 1rem 0;
@@ -42,6 +43,31 @@
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         section { padding: 120px 0; overflow: hidden; }
         
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-gold);
+            color: #fff;
+            padding: 0.8rem 2.2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #b3926c;
+        }
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+        .btn-outline:hover {
+            background-color: var(--primary-gold);
+            color: #fff;
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -50,319 +76,422 @@
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         header {
-            background-color: transparent;
-            padding: 1.5rem 2rem;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            transition: background-color 0.4s;
+            background-color: transparent; padding: 1.5rem 2rem;
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100; transition: background-color 0.4s, padding 0.4s;
         }
         header.scrolled {
             background-color: rgba(18, 18, 18, 0.85);
             backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
         }
         nav { display: flex; justify-content: space-between; align-items: center; }
         nav .logo {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--text-light);
-            text-decoration: none;
+            font-family: 'Poppins', sans-serif; font-weight: 700;
+            font-size: 1.5rem; color: var(--text-light); text-decoration: none;
         }
         nav .logo span { color: var(--primary-gold); }
-        nav ul { list-style: none; display: flex; gap: 2.5rem; margin: 0; padding: 0; }
+        
+        nav ul { list-style: none; display: flex; align-items: center; gap: 2.5rem; margin: 0; padding: 0; }
         nav a { color: var(--text-light); text-decoration: none; transition: color 0.3s; font-weight: 500; }
         nav a:hover { color: var(--primary-gold); }
+        
+        .menu-toggle {
+            display: none; background: none; border: none;
+            color: white; font-size: 1.5rem; cursor: pointer; z-index: 101;
+        }
 
         .hero {
-            padding: 0;
-            height: 100vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            padding: 0; height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
             background-image: linear-gradient(rgba(0,0,0, 0.5), rgba(0,0,0, 0.5)), url('barberos.webp');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-size: cover; background-position: center; background-attachment: fixed;
         }
-        .hero-logo {
-            max-width: 400px;
-            width: 80%;
-            height: auto;
-            filter: invert(1) brightness(1.5);
-        }
+        .hero-logo { max-width: 400px; width: 80%; height: auto; filter: invert(1) brightness(1.5); }
         .hero p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 2rem;
+            font-size: 1.2rem; color: var(--text-light);
+            letter-spacing: 2px; text-transform: uppercase; margin: 1rem 0 2.5rem 0;
         }
+        .hero-cta { display: flex; gap: 1rem; }
 
-        #about {
-            background-color: var(--background-light);
-            padding-top: 150px;
-        }
-        .about-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
+        #about { background-color: var(--background-light); padding-top: 150px; }
+        .about-container { position: relative; display: flex; align-items: center; }
         .about-image-wrapper {
-            position: absolute;
-            top: -80px;
-            right: 0;
-            width: 55%;
-            height: 550px;
-            z-index: 1;
-            border-radius: 5px;
+            position: absolute; top: -80px; right: 0; width: 55%; height: 550px; z-index: 1; border-radius: 5px;
         }
-        .about-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 5px;
-        }
+        .about-image { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
         .about-content {
-            position: relative;
-            z-index: 2;
-            background: var(--background-light);
-            padding: 3rem;
-            width: 55%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border-radius: 5px;
+            position: relative; z-index: 2; background: var(--background-light);
+            padding: 3rem; width: 55%; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-radius: 5px;
         }
-        .about-content .subtitle {
-            font-family: var(--font-body);
-            font-weight: 500;
-            color: var(--primary-gold);
-            margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+        .about-content .subtitle, .offer-content .subtitle {
+            font-family: 'Poppins', sans-serif; font-weight: 500;
+            color: var(--primary-gold); margin-bottom: 0.5rem; letter-spacing: 1px;
         }
         .about-content .line-decorator {
-            width: 50px;
-            height: 2px;
-            background-color: var(--primary-gold);
-            margin-bottom: 2rem;
-            border: none;
+            width: 50px; height: 2px; background-color: var(--primary-gold);
+            margin-bottom: 2rem; border: none;
         }
-        .about-content h2 {
-            font-size: 2.8rem;
-            line-height: 1.3;
-        }
-        .about-content p {
-            color: var(--text-muted);
-            margin-bottom: 0;
-        }
+        .about-content h2 { font-size: 2.8rem; line-height: 1.3; }
+        .about-content p { color: var(--text-muted); margin-bottom: 0; }
         
-        #offer {
-            background-color: var(--background-dark);
-            color: var(--text-light);
-            text-align: center;
-            padding: 100px 20px;
+        #promise { background-color: var(--background-alt); }
+        .promise-header { text-align: center; max-width: 700px; margin: 0 auto 4rem auto; }
+        .promise-header h2 { font-size: 2.8rem; }
+        .promise-header p { color: var(--text-muted); font-size: 1.1rem; }
+        .promise-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 2rem; text-align: center;
         }
-        .offer-card {
-            max-width: 700px;
-            margin: 0 auto;
-            border: 2px solid var(--primary-gold);
-            border-radius: 10px;
-            padding: 3rem;
+        .promise-item .icon {
+            font-size: 2.5rem; color: var(--primary-gold);
+            margin-bottom: 1.5rem;
         }
-        #offer h2 {
-            font-family: var(--font-display);
-            color: var(--text-light);
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
+        .promise-item h3 {
+            font-family: 'Poppins', sans-serif; font-weight: 700;
+            font-size: 1.3rem; color: var(--text-dark);
         }
-        #offer .subtitle {
-            font-family: var(--font-body);
-            color: var(--primary-gold);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-        }
-        .offer-feature {
-            font-family: var(--font-body);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-        .offer-price {
-            font-family: var(--font-display);
-            font-size: 6rem;
-            color: var(--primary-gold);
-            line-height: 1;
-            margin: 2rem 0;
-        }
-        .offer-price span {
-            font-size: 1.5rem;
-            vertical-align: super;
-        }
-        .offer-cta {
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
-        }
-        
-        #servicios { text-align: center; }
-        .section-logo { height: 60px; margin: 0 auto 2rem auto; display: block; }
-        #servicios h2 { font-size: 3rem; }
-        .servicios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; }
-        .servicio { background-color: #fff; padding: 2.5rem; border: 1px solid #eee; border-radius: 5px; transition: transform 0.3s, box-shadow 0.3s; }
-        .servicio:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-        .servicio h3 { font-size: 1.8rem; }
-        .servicio p { color: var(--text-muted); }
-        .servicio .precio { font-family: var(--font-body); font-size: 2rem; font-weight: 700; color: var(--primary-gold); margin-top: 1rem; }
+        .promise-item p { color: var(--text-muted); margin: 0; }
 
-        /* --- SECCIÓN GALERÍA RECONSTRUIDA PARA MÁXIMA FIABILIDAD --- */
-        #gallery {
+        /* === ESTILOS DE LA NUEVA SECCIÓN DEL BONO === */
+        #offer { background-color: var(--background-dark); }
+        .offer-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+        }
+        .offer-image-wrapper {
             text-align: center;
         }
-        #gallery .gallery-header {
-            max-width: 700px;
-            margin: 0 auto 4rem auto;
+        .offer-image-wrapper img {
+            max-width: 100%;
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+            transform: rotate(-5deg);
+            transition: transform 0.4s ease;
         }
-        #gallery h2 {
-            font-size: 3rem;
+        .offer-image-wrapper img:hover {
+            transform: rotate(0) scale(1.05);
         }
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
+        .offer-content h2 {
+            color: var(--text-light);
+            font-size: 2.8rem;
+            line-height: 1.2;
         }
-        .social-icons a {
-            color: var(--text-dark);
-            text-decoration: none;
-            font-size: 1.2rem;
-            border: 1px solid #ddd;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        .offer-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
         }
-        .social-icons a:hover {
-            background-color: var(--primary-gold);
-            color: #fff;
-            border-color: var(--primary-gold);
-        }
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .image-grid img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
+        .offer-highlight {
+            background-color: #1A1A1A;
+            border: 1px solid var(--border-dark);
+            border-left: 4px solid var(--primary-gold);
+            padding: 1.5rem;
             border-radius: 5px;
+            margin-top: 2rem;
+        }
+        .offer-highlight p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        .offer-highlight strong {
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        #servicios { text-align: center; }
+        .servicios-header { max-width: 700px; margin: 0 auto 4rem auto; }
+        #servicios h2 { font-size: 3rem; }
+        .servicios-header p { font-size: 1.1rem; color: var(--text-muted); }
+        .servicios-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 4rem; text-align: left; }
+        .servicio {
+            background-color: #fff; padding: 2.5rem; border: 1px solid #eee; border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .servicio:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .servicio-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem; }
+        .servicio-icon { font-size: 2rem; color: var(--primary-gold); }
+        .servicio-title h3 { font-size: 1.5rem; margin: 0; }
+        .servicio p { color: var(--text-muted); flex-grow: 1; margin-bottom: 1.5rem; }
+        .servicio .precio {
+            font-family: 'Poppins', sans-serif; font-size: 2rem;
+            font-weight: 700; color: var(--primary-gold); margin-top: auto;
         }
         
+        #gallery {
+            background-color: var(--background-dark); padding: 120px 20px;
+        }
+        .gallery-header { text-align: center; margin-bottom: 5rem; }
+        #gallery .gallery-header h2 {
+            color: var(--text-light); font-size: 3rem; margin-bottom: 1rem;
+        }
+        .gallery-intro {
+            font-family: 'Poppins', sans-serif;
+            color: rgba(255, 255, 255, 0.7); max-width: 650px;
+            margin: 0 auto; line-height: 1.7;
+        }
+        .gallery-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+            align-items: center; margin-bottom: 6rem;
+        }
+        .gallery-row.reverse { direction: rtl; }
+        .gallery-row.reverse > * { direction: ltr; }
+        .gallery-collage { position: relative; height: 450px; min-height: 400px; }
+        .gallery-collage img {
+            position: absolute; border-radius: 8px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            border: 3px solid #2a2a2a;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+        .gallery-collage img:hover {
+            transform: scale(1.05) !important; box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            border-color: var(--primary-gold); z-index: 5;
+        }
+        .collage-img-1 { width: 65%; height: auto; top: 0; left: 0; transform: rotate(-4deg); z-index: 1; }
+        .collage-img-2 { width: 55%; height: auto; bottom: 0; right: 0; transform: rotate(3deg); z-index: 2; }
+        .collage-img-3 { width: 60%; height: auto; top: 10%; right: 5%; transform: rotate(5deg); z-index: 1; }
+        .collage-img-4 { width: 70%; height: auto; left: 0; bottom: 0; transform: rotate(-6deg); z-index: 2; }
+        .gallery-text-content {
+            background-color: #1A1A1A; border-radius: 8px; padding: 3rem; position: relative;
+            text-align: left; height: fit-content; display: flex; flex-direction: column;
+            justify-content: center; border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gallery-text-content .icon-large {
+            position: absolute; top: 1rem; left: 1rem; font-size: 6rem;
+            color: var(--primary-gold); opacity: 0.04; z-index: 1;
+        }
+        .gallery-text-content h3 { font-size: 2.5rem; position: relative; z-index: 2; color: var(--text-light); }
+        .gallery-text-content blockquote {
+            font-family: 'Poppins', sans-serif; font-style: italic; color: rgba(255,255,255,0.8);
+            margin: 1.5rem 0; font-size: 1.1rem; line-height: 1.7;
+            border-left: 4px solid var(--primary-gold); padding-left: 1.5rem; position: relative; z-index: 2;
+        }
+        .gallery-text-content cite {
+            display: block; color: var(--primary-gold); font-weight: 700;
+            font-size: 1rem; font-style: normal; text-align: right; position: relative; z-index: 2;
+        }
+
         .section-divider {
-            background-color: var(--background-dark);
-            padding: 5rem 0;
-            text-align: center;
+            background-color: var(--background-dark); padding: 5rem 0; text-align: center;
         }
         .section-divider h2 {
-            font-family: var(--font-display);
-            color: var(--text-light);
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin: 0;
+            font-family: 'Playfair Display', serif; color: var(--text-light);
+            font-size: 2.5rem; text-transform: uppercase; letter-spacing: 4px; margin: 0;
         }
         
-        #contacto {
-            position: relative;
-            padding: 0;
-            height: 700px;
-        }
+        #contacto { position: relative; padding: 0; height: 700px; }
         .map-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            filter: grayscale(1);
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            filter: grayscale(1) brightness(0.9); z-index: 1;
         }
         .contact-container {
-            position: relative;
-            height: 100%;
-            z-index: 2;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            position: relative; height: 100%; z-index: 2;
+            display: flex; justify-content: flex-start; align-items: center;
         }
         .contact-card {
-            background: var(--background-light);
-            padding: 3rem;
-            border-radius: 5px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            max-width: 450px;
-            width: 90%;
+            background: var(--background-light); padding: 3rem;
+            border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            max-width: 450px; width: 90%;
         }
-        .contact-card h2 {
-            font-size: 2.8rem;
-            margin-bottom: 2rem;
-        }
+        .contact-card h2 { font-size: 2.8rem; margin-bottom: 2rem; }
         .info-block {
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem;
         }
         .info-block .icon {
-            font-size: 1.5rem;
+            font-size: 1.5rem; color: var(--primary-gold);
+            margin-top: 5px; width: 25px; text-align: center;
+        }
+        .info-block h4 {
+            font-family: 'Poppins', sans-serif; font-weight: 700;
+            font-size: 1.1rem; margin: 0 0 0.2rem 0;
+        }
+        .info-block p { margin: 0; color: var(--text-muted); }
+        .info-block p a { color: inherit; text-decoration: none; transition: color 0.3s; }
+        .info-block p a:hover { color: var(--primary-gold); }
+        
+        .footer-container {
+            background-color: var(--background-dark);
+            color: var(--text-muted);
+        }
+        .footer-cta {
+            background-color: #1A1A1A;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .footer-cta h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-light);
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        .footer-cta p {
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto 2rem auto;
+            color: rgba(255,255,255,0.7);
+        }
+        .footer-cta .btn {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .footer-cta .btn:hover {
+            transform: scale(1.15);
+        }
+        .footer-main {
+            padding: 80px 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 3rem;
+        }
+        .footer-column .footer-logo {
+            height: 50px;
+            margin-bottom: 1.5rem;
+            filter: invert(1) brightness(0.8);
+        }
+        .footer-column .footer-tagline {
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .footer-column h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-gold);
+        }
+        .footer-links, .footer-contact {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-links li:not(:last-child),
+        .footer-contact li:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+        .footer-links a, .footer-contact a, .footer-contact span {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s, padding-left 0.3s;
+        }
+        .footer-links a:hover, .footer-contact a:hover {
+            color: var(--primary-gold);
+            padding-left: 5px;
+        }
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .footer-contact i {
             color: var(--primary-gold);
             margin-top: 5px;
         }
-        .info-block h4 {
-            font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin: 0 0 0.2rem 0;
+        .social-links-footer {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            display: flex;
+            gap: 1rem;
         }
-        .info-block p {
-            margin: 0;
-            color: var(--text-muted);
-        }
-        .contact-button {
+        .social-links-footer a {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            transition: color 0.3s, transform 0.3s;
             display: inline-block;
-            background-color: var(--primary-gold);
-            color: #fff;
-            padding: 0.8rem 2rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            margin-top: 1rem;
-            transition: transform 0.3s;
         }
-        .contact-button:hover { transform: scale(1.05); }
+        .social-links-footer a:hover {
+            color: var(--primary-gold);
+            transform: translateY(-3px);
+        }
+        .footer-bottom {
+            border-top: 1px solid var(--border-dark);
+            padding: 1.5rem 0;
+        }
+        .footer-bottom .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
 
-        footer { background-color: var(--background-dark); text-align: center; padding: 3rem 0; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer-logo { height: 50px; margin-bottom: 1.5rem; filter: invert(1) brightness(0.8); }
-        
         @media (max-width: 900px) {
             .about-container { flex-direction: column; }
             .about-image-wrapper { position: static; width: 100%; height: 350px; margin-bottom: 2rem; }
             .about-content { width: 100%; padding: 2rem; }
-            .servicios-grid, .contact-grid { grid-template-columns: 1fr; }
+            
+            .promise-grid { grid-template-columns: 1fr; }
+            .promise-item:not(:last-child) { margin-bottom: 2rem; }
+
+            .offer-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .offer-image-wrapper { order: -1; } /* Pone la imagen primero en móvil */
+
+            .servicios-grid { grid-template-columns: 1fr; }
+            
+            .gallery-row, .gallery-row.reverse {
+                grid-template-columns: 1fr; direction: ltr;
+            }
+            .gallery-collage { margin-bottom: 2rem; height: 400px; }
+            .gallery-row.reverse .gallery-text-content { order: -1; }
+
             .contact-container { justify-content: center; }
             .contact-card { background: rgba(249, 247, 242, 0.95); }
+
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
+        
         @media (max-width: 768px) {
-            nav ul { display: none; }
             section { padding: 80px 0; }
+            h2, h2.font-size-2-8rem { font-size: 2.2rem; }
+            .about-content h2, .offer-content h2, .contact-card h2 { font-size: 2.5rem; }
+            
+            nav ul {
+                display: none; position: fixed; top: 0; left: 0; right: 0;
+                background-color: rgba(18, 18, 18, 0.98); backdrop-filter: blur(5px);
+                width: 100%; height: 100vh; flex-direction: column;
+                justify-content: center; align-items: center; gap: 2rem;
+            }
+            nav ul.active { display: flex; }
+            nav ul a { font-size: 1.5rem; }
+            nav .btn { padding: 0.8rem 4rem; }
+            .menu-toggle { display: block; }
+
+            .hero-cta { flex-direction: column; align-items: center; width: 100%;}
+            .hero-cta .btn { width: 80%; text-align: center;}
+            
+            .footer-cta h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 500px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom .container {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -372,10 +501,15 @@
     <header id="header">
         <nav class="container">
             <a href="#inicio" class="logo">ESTIL<span>.</span></a>
-            <ul>
+            <ul id="nav-menu">
                 <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#gallery">Clientes</a></li>
                 <li><a href="#contacto">Contacto</a></li>
+                <li><a href="https://wa.me/34632676812" target="_blank" class="btn">Pedir Cita</a></li>
             </ul>
+            <button id="menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
         </nav>
     </header>
 
@@ -384,6 +518,10 @@
             <div class="container">
                 <img src="fondoestil.png" alt="Logo principal de Perruqueria Estil" class="hero-logo">
                 <p>Artesanos de tu imagen en Figueres</p>
+                <div class="hero-cta">
+                     <a href="#servicios" class="btn btn-outline">Ver Servicios</a>
+                     <a href="https://wa.me/34632676812" target="_blank" class="btn">Reservar por WhatsApp</a>
+                </div>
             </div>
         </section>
 
@@ -396,45 +534,93 @@
                     <p>Perruqueria Estil es más que un corte de pelo; es un espacio creado para el hombre de hoy. Nacimos de la pasión por la barbería clásica, adaptada a un mundo que nunca deja de cambiar. Creemos en el poder de un buen corte para realzar tu confianza, por eso dedicamos tiempo a cada cliente para crear un look que respeta y define tu estilo personal.</p>
                 </div>
                 <div class="about-image-wrapper">
-                    <img src="corte.png" alt="Bader realizando un corte de pelo de precisión en Perruqueria Estil" class="about-image">
+                    <img src="pelu.png" alt="Interior de la barbería Perruqueria Estil" class="about-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="promise" class="reveal">
+            <div class="container">
+                <div class="promise-header">
+                    <h2>Tu Estilo, Nuestra Promesa</h2>
+                    <p>Creemos que cada detalle cuenta. Por eso nos centramos en tres pilares que garantizan una experiencia y un resultado que superan tus expectativas.</p>
+                </div>
+                <div class="promise-grid">
+                    <div class="promise-item">
+                        <div class="icon"><i class="fas fa-cut"></i></div>
+                        <h3>Artesanos del Detalle</h3>
+                        <p>Cada corte es una obra de precisión. Usamos técnicas clásicas y modernas para garantizar un acabado impecable y duradero.</p>
+                    </div>
+                    <div class="promise-item">
+                        <div class="icon"><i class="fas fa-comments"></i></div>
+                        <h3>Asesoramiento Personal</h3>
+                        <p>Te escuchamos y aconsejamos para encontrar juntos el estilo que mejor se adapta a tu rostro, tu cabello y tu día a día.</p>
+                    </div>
+                    <div class="promise-item">
+                        <div class="icon"><i class="fas fa-chair"></i></div>
+                        <h3>Ambiente de Confianza</h3>
+                        <p>Un espacio donde relajarte y desconectar. Queremos que tu visita sea un momento para ti, con un trato cercano y profesional.</p>
+                    </div>
                 </div>
             </div>
         </section>
         
+        <!-- === SECCIÓN DEL BONO CON IMAGEN ACTUALIZADA === -->
         <section id="offer" class="reveal">
             <div class="container">
-                <div class="offer-card">
-                    <p class="subtitle">NUESTRO BONO EXCLUSIVO</p>
-                    <h2>Bono Estil</h2>
-                    <p class="offer-feature">5 CORTES DE PELO</p>
-                    <div class="offer-price">35<span>€</span></div>
-                    <p class="offer-cta">Ahorra en cada visita y mantén tu estilo siempre perfecto. <br><strong>Recoge tu tarjeta en el local.</strong></p>
+                <div class="offer-layout">
+                    <div class="offer-image-wrapper">
+                        <img src="bono.png" alt="Tarjeta de fidelidad de Perruqueria Estil con 10 sellos para un corte gratis">
+                    </div>
+                    <div class="offer-content">
+                        <p class="subtitle">TU FIDELIDAD TIENE PREMIO</p>
+                        <h2>Un Corte Gratis por cada Diez</h2>
+                        <p>Valoramos tu confianza por encima de todo. Por eso, queremos premiar a nuestros clientes más leales con lo que mejor sabemos hacer.</p>
+                        <div class="offer-highlight">
+                            <p>Pide tu tarjeta, acumula un sello con cada corte y, al llegar al décimo, <strong>el siguiente es una invitación de la casa</strong>. ¡Así de simple!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="servicios" class="reveal">
             <div class="container">
-                <img src="fondoestil.png" alt="Icono de Estil" class="section-logo">
-                <h2>Nuestros Rituales</h2>
+                <div class="servicios-header">
+                     <img src="fondoestil.png" alt="Icono de Estil" style="height: 60px; margin: 0 auto 2rem auto; display: block;">
+                     <h2>Nuestros Rituales</h2>
+                     <p>Desde los cortes más precisos hasta el cuidado experto de la barba. Cada servicio está pensado para ofrecerte un resultado excepcional y una experiencia de calidad.</p>
+                </div>
                 <div class="servicios-grid">
                      <div class="servicio">
-                        <h3>Corte de Precisión</h3>
+                        <div class="servicio-header">
+                            <span class="servicio-icon"><i class="fas fa-magic"></i></span>
+                            <div class="servicio-title"><h3>Corte de Precisión</h3></div>
+                        </div>
                         <p>Asesoramiento, lavado y un corte meticuloso para definir tu look. El ritual esencial para un estilo impecable.</p>
                         <div class="precio">8€</div>
                     </div>
                     <div class="servicio">
-                        <h3>Diseño de Barba</h3>
+                        <div class="servicio-header">
+                            <span class="servicio-icon"><i class="fas fa-stream"></i></span>
+                            <div class="servicio-title"><h3>Diseño de Barba</h3></div>
+                        </div>
                         <p>Definición y perfilado de la barba con navaja y máquina para un acabado limpio y cuidado. Tu estilo, bien definido.</p>
                         <div class="precio">4€</div>
                     </div>
                     <div class="servicio">
-                        <h3>Corte Infantil</h3>
+                        <div class="servicio-header">
+                            <span class="servicio-icon"><i class="fas fa-child"></i></span>
+                            <div class="servicio-title"><h3>Corte Infantil</h3></div>
+                        </div>
                         <p>Estilo y paciencia para los más pequeños. Un corte moderno y divertido para que también luzcan genial (hasta 12 años).</p>
                         <div class="precio">6€</div>
                     </div>
                     <div class="servicio">
-                        <h3>Cobertura de Canas</h3>
+                        <div class="servicio-header">
+                            <span class="servicio-icon"><i class="fas fa-brush"></i></span>
+                            <div class="servicio-title"><h3>Cobertura de Canas</h3></div>
+                        </div>
                         <p>Un toque de color sutil y natural para disimular las canas y rejuvenecer tu look de forma discreta y elegante.</p>
                         <div class="precio">15€</div>
                     </div>
@@ -442,24 +628,35 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE GALERÍA CORREGIDA Y SIMPLIFICADA -->
         <section id="gallery" class="reveal">
             <div class="container">
                 <div class="gallery-header">
-                    <img src="fondoestil.png" alt="Icono Estil" class="section-logo">
-                    <h2>Nuestros Clientes</h2>
-                    <p class="text-muted">La mejor carta de presentación es la satisfacción de nuestros clientes. Síguenos en redes sociales y no te pierdas nuestros últimos trabajos.</p>
-                    <div class="social-icons">
-                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <h2>Nuestro Estilo, Vuestra Confianza</h2>
+                    <p class="gallery-intro">Más que cortes, creamos experiencias. Aquí, la precisión de nuestras herramientas se encuentra con la personalidad de nuestros clientes. Estos son los resultados que nos enorgullecen.</p>
+                </div>
+                <div class="gallery-row">
+                    <div class="gallery-collage">
+                        <img src="corte1.png" alt="Corte de pelo moderno texturizado con estilo" class="collage-img-1">
+                        <img src="corte2.png" alt="Cliente con corte de pelo con diseño y mascarilla profesional" class="collage-img-2">
+                    </div>
+                    <div class="gallery-text-content">
+                        <i class="fas fa-cut icon-large"></i>
+                        <h3>Precisión y Arte</h3>
+                        <blockquote>"Bader, un crack, sabe lo que hace! El degradado es perfecto y el trato inmejorable. Ya soy cliente fijo."</blockquote>
+                        <cite>— Alex V.</cite>
                     </div>
                 </div>
-                <div class="image-grid">
-                    <img src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?q=80&w=1780&auto=format&fit=crop" alt="Corte de pelo moderno para hombre joven">
-                    <img src="https://images.unsplash.com/photo-1620821535865-c2b0a0429a99?q=80&w=1887&auto=format&fit=crop" alt="Hombre con corte de pelo y barba cuidados">
-                    <img src="https://images.unsplash.com/photo-1622288432454-20b1445b9589?q=80&w=1932&auto=format&fit=crop" alt="Corte de pelo con degradado">
-                    <img src="https://images.unsplash.com/photo-1623393892230-c6f8f731180b?q=80&w=1887&auto=format&fit=crop" alt="Cliente contento en la barbería">
+                <div class="gallery-row reverse">
+                    <div class="gallery-text-content">
+                        <i class="fas fa-quote-right icon-large"></i>
+                        <h3>Confianza y Asesoramiento</h3>
+                        <blockquote>"Vine por recomendación y ahora soy yo el que lo recomienda. Siempre salgo impecable. ¡Gracias!"</blockquote>
+                        <cite>— Marc G.</cite>
+                    </div>
+                     <div class="gallery-collage">
+                        <img src="corte3.jfif" alt="Corte de pelo con degradado y estilo definido en la barbería" class="collage-img-3">
+                        <img src="corte4.jpg" alt="Corte de pelo con dibujo y degradado extremo en primer plano" class="collage-img-4">
+                    </div>
                 </div>
             </div>
         </section>
@@ -470,42 +667,98 @@
 
         <section id="contacto">
             <div class="map-background">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2937.100945899018!2d2.960228376722234!3d42.2764169712019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ba8de758514589%3A0x3445b2444d03e54b!2sCarrer%20Pujades%2C%2018%2C%2017600%20Figueres%2C%20Girona!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" width="600" height="450" style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe title="Ubicación de Perruqueria Estil en Google Maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2937.100945899018!2d2.960228376722234!3d42.2764169712019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12ba8de758514589%3A0x3445b2444d03e54b!2sCarrer%20Pujades%2C%2018%2C%2017600%20Figueres%2C%20Girona!5e0!3m2!1ses!2ses!4v1700000000000!5m2!1ses!2ses" width="600" height="450" style="border:0; width:100%; height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="container contact-container">
                 <div class="contact-card reveal">
                     <h2>Nuestro Espacio</h2>
                     <div class="info-block">
-                        <span class="icon">📍</span>
+                        <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
                         <div class="info-text">
                             <h4>Dirección</h4>
                             <p>Carrer Pujades, 18, Figueres</p>
                         </div>
                     </div>
                     <div class="info-block">
-                        <span class="icon">📞</span>
+                        <span class="icon"><i class="fas fa-phone"></i></span>
                         <div class="info-text">
                             <h4>Teléfono y Citas</h4>
-                            <p>632 67 68 12 (WhatsApp disponible)</p>
+                            <p><a href="tel:+34632676812">632 67 68 12</a> (WhatsApp disponible)</p>
                         </div>
                     </div>
                     <div class="info-block">
-                        <span class="icon">⏰</span>
+                        <span class="icon"><i class="fas fa-clock"></i></span>
                         <div class="info-text">
                             <h4>Horario</h4>
                             <p>Lunes a Sábado <br>10:00 – 13:00 | 15:00 – 20:00</p>
                         </div>
                     </div>
-                    <a href="https://wa.me/34632676812" target="_blank" class="contact-button">Reservar por WhatsApp</a>
+                    <a href="https://wa.me/34632676812" target="_blank" class="btn">Reservar por WhatsApp</a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <img src="fondoestil.png" alt="Logo Estil" class="footer-logo">
-        <p>&copy; 2025 Perruqueria Estil. Diseñado con pasión.</p>
+    <footer class="footer-container">
+        <div id="footer-cta" class="footer-cta reveal">
+            <div class="container">
+                <h2>El Estilo es una Decisión.</h2>
+                <p>Permítenos ayudarte a tomar la mejor. Tu silla te espera.</p>
+                <a href="https://wa.me/34632676812" target="_blank" class="btn">Reservar mi Cita</a>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="container footer-grid">
+                <div class="footer-column">
+                    <img src="fondoestil.png" alt="Logo Estil en negativo" class="footer-logo">
+                    <p class="footer-tagline">Artesanos de tu imagen en Figueres, donde la tradición se encuentra con el estilo.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Explora</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">Filosofía</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#gallery">Clientes</a></li>
+                        <li><a href="#offer">Bono Estil</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Encuéntranos</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Carrer Pujades, 18, Figueres</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+34632676812">632 67 68 12</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-clock"></i>
+                            <span>Lun - Sáb: 10:00 – 20:00</span>
+                        </li>
+                    </ul>
+                </div>
+                 <div class="footer-column">
+                    <h4>Síguenos</h4>
+                    <p>Inspírate y sé el primero en conocer nuestras novedades.</p>
+                    <ul class="social-links-footer">
+                        <li><a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://wa.me/34632676812" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Perruqueria Estil. Todos los derechos reservados.</p>
+                <p>Diseñado con pasión.</p>
+            </div>
+        </div>
     </footer>
     
     <script>
@@ -530,6 +783,27 @@
         };
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = navMenu.querySelectorAll('a');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            const isActive = navMenu.classList.toggle('active');
+            menuIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+            document.body.style.overflow = isActive ? 'hidden' : '';
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuIcon.className = 'fas fa-bars';
+                    document.body.style.overflow = '';
+                }
+            });
+        });
     </script>
 
 </body>
