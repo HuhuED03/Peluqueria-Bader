@@ -153,8 +153,12 @@
         }
         .promise-item p { color: var(--text-muted); margin: 0; }
 
-        /* === ESTILOS DE LA NUEVA SECCIÓN DEL BONO === */
-        #offer { background-color: var(--background-dark); }
+        #offer {
+            background: linear-gradient(rgba(0,0,0, 0.85), rgba(0,0,0, 0.85)), url('foto.avif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
         .offer-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -168,7 +172,7 @@
             max-width: 100%;
             width: 400px;
             border-radius: 12px;
-            box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0px 10px 30px rgba(0,0,0,0.5);
             transform: rotate(-5deg);
             transition: transform 0.4s ease;
         }
@@ -186,7 +190,7 @@
             margin-bottom: 2rem;
         }
         .offer-highlight {
-            background-color: #1A1A1A;
+            background-color: rgba(0,0,0,0.3);
             border: 1px solid var(--border-dark);
             border-left: 4px solid var(--primary-gold);
             padding: 1.5rem;
@@ -198,6 +202,7 @@
             font-weight: 500;
             font-size: 1rem;
             line-height: 1.7;
+            color: var(--text-light);
         }
         .offer-highlight strong {
             color: var(--primary-gold);
@@ -446,8 +451,9 @@
             .promise-grid { grid-template-columns: 1fr; }
             .promise-item:not(:last-child) { margin-bottom: 2rem; }
 
-            .offer-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .offer-image-wrapper { order: -1; } /* Pone la imagen primero en móvil */
+            .offer-layout { grid-template-columns: 1fr; gap: 3rem; text-align: center;}
+            .offer-image-wrapper { order: -1; }
+            .offer-content {text-align: left;}
 
             .servicios-grid { grid-template-columns: 1fr; }
             
@@ -507,6 +513,7 @@
                 <li><a href="#contacto">Contacto</a></li>
                 <li><a href="https://wa.me/34632676812" target="_blank" class="btn">Pedir Cita</a></li>
             </ul>
+            <!-- ESTE ES EL BOTÓN QUE ABRE Y CIERRA EL MENÚ EN MÓVIL -->
             <button id="menu-toggle" aria-label="Abrir menú">
                 <i class="fas fa-bars"></i>
             </button>
@@ -565,7 +572,6 @@
             </div>
         </section>
         
-        <!-- === SECCIÓN DEL BONO CON IMAGEN ACTUALIZADA === -->
         <section id="offer" class="reveal">
             <div class="container">
                 <div class="offer-layout">
@@ -784,17 +790,26 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
+        // --- LÓGICA DEL MENÚ MÓVIL ---
         const menuToggle = document.getElementById('menu-toggle');
         const navMenu = document.getElementById('nav-menu');
         const navLinks = navMenu.querySelectorAll('a');
         const menuIcon = menuToggle.querySelector('i');
 
+        // 1. Escuchamos el clic en el botón del menú (el que tiene las 3 rayas o la X)
         menuToggle.addEventListener('click', () => {
+            // 2. Alternamos la clase 'active' en el menú. Esto lo muestra o lo oculta.
             const isActive = navMenu.classList.toggle('active');
+            
+            // 3. Cambiamos el icono. Si el menú está activo, mostramos la 'X'. Si no, las 3 rayas.
+            // ¡ESTA ES LA CLAVE PARA CERRAR EL MENÚ!
             menuIcon.className = isActive ? 'fas fa-times' : 'fas fa-bars';
+            
+            // (Extra) Evita que se pueda hacer scroll en el fondo mientras el menú está abierto.
             document.body.style.overflow = isActive ? 'hidden' : '';
         });
 
+        // Este código es para que el menú se cierre automáticamente si el usuario SÍ hace clic en una sección.
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (navMenu.classList.contains('active')) {
